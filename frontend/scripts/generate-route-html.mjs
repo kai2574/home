@@ -64,6 +64,15 @@ const routes = [
     description:
       'Manage your Shizuha Forge API key, usage, free-tier quota, billing status, and account settings.',
   },
+  {
+    // VEN-174: /forge/docs must have its own prerendered shell — without it
+    // nginx's `try_files $uri/` hits a bare directory and 403s, the same way
+    // /forge did before the 2026-07-10 fix.
+    output: 'forge/docs/index.html',
+    title: 'Forge API Docs — Shizuha',
+    description:
+      'Shizuha Forge developer documentation: authenticate with X-API-Key, POST /api/forge/generate, rate limits (10 images/day free, then $0.02/image), and copy-paste curl, Python, and JavaScript examples.',
+  },
 ]
 
 const replaceTag = (html, pattern, replacement) => {
